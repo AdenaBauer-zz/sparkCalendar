@@ -3,12 +3,12 @@
 // Developer Console, https://console.developers.google.com
 var CLIENT_ID = '231446828709-rern8mev478lpdd0pddn6ers73pnnulh.apps.googleusercontent.com';
 
-var SCOPES = ["https://www.googleapis.com/auth/calendar.readonly"];
+var SCOPES = ["https://www.googleapis.com/auth/calendar"];
 
 /**
  * Check if current user has authorized this application.
  */
- /*
+ 
 function checkAuth() {
   gapi.auth.authorize(
     {
@@ -17,7 +17,7 @@ function checkAuth() {
       'immediate': true
     }, handleAuthResult);
 }
-*/
+
 /**
  * Handle response from authorization server.
  *
@@ -63,7 +63,7 @@ function loadCalendarApi() {
  */
 function listUpcomingEvents() {
   var request = gapi.client.calendar.events.list({
-    'calendarId': 'primary',
+    'calendarId': '7tb1s3h4qj4dt8tab7msg7vq9g@group.calendar.google.com',
     'timeMin': (new Date()).toISOString(),
     'showDeleted': false,
     'singleEvents': true,
@@ -74,8 +74,9 @@ function listUpcomingEvents() {
   request.execute(function(resp) {
     var events = resp.items;
     appendPre('Upcoming events:');
-
+    console.log(events.length);
     if (events.length > 0) {
+      console.lo
       for (i = 0; i < events.length; i++) {
         var event = events[i];
         var when = event.start.dateTime;
