@@ -1,0 +1,11 @@
+#calendarEmbed{
+	float: left;
+}
+
+#output{
+	position: fixed;
+	float:right;
+	background-color: red;
+	width: 250px;
+	margin-left: 820px;
+}

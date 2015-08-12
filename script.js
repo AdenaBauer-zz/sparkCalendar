@@ -1,9 +1,11 @@
 
 // Your Client ID can be retrieved from your project in the Google
 // Developer Console, https://console.developers.google.com
+
 var CLIENT_ID = '231446828709-rern8mev478lpdd0pddn6ers73pnnulh.apps.googleusercontent.com';
 
 var SCOPES = ["https://www.googleapis.com/auth/calendar"];
+
 
 /**
  * Check if current user has authorized this application.
@@ -45,6 +47,7 @@ function handleAuthClick(event) {
   gapi.auth.authorize(
     {client_id: CLIENT_ID, scope: SCOPES, immediate: false},
     handleAuthResult);
+
   return false;
 }
 
@@ -53,6 +56,7 @@ function handleAuthClick(event) {
  * once client library is loaded.
  */
 function loadCalendarApi() {
+   fill();
   gapi.client.load('calendar', 'v3', listUpcomingEvents);
 }
 
@@ -76,7 +80,6 @@ function listUpcomingEvents() {
     appendPre('Upcoming events:');
     console.log(events.length);
     if (events.length > 0) {
-      console.lo
       for (i = 0; i < events.length; i++) {
         var event = events[i];
         var when = event.start.dateTime;
@@ -102,4 +105,46 @@ function appendPre(message) {
   var pre = document.getElementById('output');
   var textContent = document.createTextNode(message + '\n');
   pre.appendChild(textContent);
+}
+
+
+
+//LOGIN STUFF
+
+function onchangeFunc(){
+
+  var e = document.getElementById("ddlViewBy");
+  var strUser = e.options[e.selectedIndex].text;
+
+  console.log(strUser);
+
+
+}
+
+function loginButtonClick(){
+  var e = document.getElementById("ddlViewBy");
+  var strUser = e.options[e.selectedIndex].text;
+  if(strUser == "Select"){
+    return;
+  }
+  localStorage.setItem('user', strUser);
+  location.href = "http://localhost:8000/index.html"
+}
+/*
+var currentUser;
+function setCurrentUser(strUser){
+  currentUser = strUser;
+}
+
+function getCurrentUser(){
+  return currentUser;
+}
+*/
+
+function fill(){
+  console.log("hi");
+  var currentUser = localStorage.getItem('user');
+  localStorage.removeItem('user');
+
+  document.getElementById('helloMessage').innerHTML = currentUser;
 }
