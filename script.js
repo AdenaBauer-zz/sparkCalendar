@@ -1,3 +1,4 @@
+'use strict';
 
 // Your Client ID can be retrieved from your project in the Google
 // Developer Console, https://console.developers.google.com
